@@ -1,5 +1,6 @@
 package fr.p10.miage.rps.model;
 
+import com.sun.org.apache.regexp.internal.RE;
 import fr.p10.miage.rps.model.Result;
 
 /**
@@ -21,6 +22,10 @@ public class RockPaperScissors {
         if(p1.equals(RPSEnum.ROCK)) {
             if(p2.equals(RPSEnum.SCISSORS)) return Result.WIN;
         }
+        return Result.LOST;
+    }
+
+    public Result play(Player p1, Player p2) {
         return Result.LOST;
     }
 }
