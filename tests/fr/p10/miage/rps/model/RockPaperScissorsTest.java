@@ -1,9 +1,6 @@
 package fr.p10.miage.rps.model;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.*;
 
@@ -24,6 +21,7 @@ public class RockPaperScissorsTest {
         rps = null;
     }
 
+    /*
     @Parameters({"rock", "rock"})
     @Test
     public void testTIEPlay(String p1, String p2) throws Exception {
@@ -76,6 +74,49 @@ public class RockPaperScissorsTest {
     @Test
     public void testLostPlay3(String p1, String p2) throws Exception {
         assertEquals(rps.play(RPSEnum.valueOf(p1), RPSEnum.valueOf(p2)), Result.LOST);
+    }
+    */
+
+    @DataProvider(name="winData")
+    public Object[][] createWinData() {
+        return new Object [][] {
+                {RPSEnum.ROCK, RPSEnum.SCISSORS},
+                {RPSEnum.SCISSORS, RPSEnum.PAPER},
+                {RPSEnum.PAPER, RPSEnum.ROCK}
+        };
+    }
+
+    @DataProvider(name="lostData")
+    public Object[][] createLostData() {
+        return new Object [][] {
+                {RPSEnum.SCISSORS, RPSEnum.ROCK},
+                {RPSEnum.PAPER, RPSEnum.SCISSORS},
+                {RPSEnum.ROCK, RPSEnum.PAPER}
+        };
+    }
+
+    @DataProvider(name="tieData")
+    public Object[][] createTieData() {
+        return new Object [][] {
+                {RPSEnum.ROCK, RPSEnum.ROCK},
+                {RPSEnum.SCISSORS, RPSEnum.SCISSORS},
+                {RPSEnum.PAPER, RPSEnum.PAPER}
+        };
+    }
+
+    @Test(dataProvider = "winData")
+    void testWinPlayDataProvider(RPSEnum p1, RPSEnum p2) {
+        assertEquals(rps.play(p1, p2), Result.WIN);
+    }
+
+    @Test(dataProvider = "lostData")
+    void testLostDataProvider(RPSEnum p1, RPSEnum p2) {
+        assertEquals(rps.play(p1, p2), Result.LOST);
+    }
+
+    @Test(dataProvider = "tieData")
+    void testTieDataProvider(RPSEnum p1, RPSEnum p2) {
+        assertEquals(rps.play(p1, p2), Result.TIE);
     }
 
 }
