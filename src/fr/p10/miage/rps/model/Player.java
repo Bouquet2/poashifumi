@@ -12,22 +12,24 @@ public class Player {
     private Integer             score;
     private ArrayList<RPSEnum>  mouvements;
     private Integer             prochainMouv;
-    static Integer              maxRand = 20;
 
     public Player(String nom) {
-        Integer rand = (int) Math.random() * maxRand;
+        this.nom = nom;
         this.prochainMouv = 0;
-        this.mouvements = new ArrayList<RPSEnum>(rand);
+        this.score = 0;
+
+        final Integer nbMouv = 20;
+        this.mouvements = new ArrayList<RPSEnum>(nbMouv);
         for(RPSEnum mouvement : mouvements) {
             mouvement = RPSEnum.getRandom();
         }
-        this.nom = nom;
     }
 
     public Player(String nom, ArrayList<RPSEnum> mouvements) {
         this.nom = nom;
         this.mouvements = mouvements;
         this.prochainMouv = 0;
+        this.score = 0;
     }
 
     public void setScore(Integer score) {
@@ -46,12 +48,14 @@ public class Player {
         return this.mouvements.size();
     }
 
-    public RPSEnum getNextMove() {
-        prochainMouv++;
+    public RPSEnum getNextMove() throws Exception{
         if(prochainMouv == mouvements.size()) {
-            return null;
+            throw new Exception("getNextMove error : " +
+                    "Il n'y a plus de mouvement disponibles " +
+                    "(Mouvement actuel : " + prochainMouv +
+                    " Dernier mouvement : " + mouvements.size());
         }
-        return mouvements.get(prochainMouv-1);
+        return mouvements.get(prochainMouv++);
     }
 
 
