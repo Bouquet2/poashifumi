@@ -11,22 +11,4 @@
             </class>
         </classes>
     </test>
-    <test name ="testLostPlay">
-        <classes >
-            <class name ="fr.p10.miage.rps.model.RockPaperScissorsTest">
-                <methods>
-                    <include name ="testLostPlay"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name ="testTiePlay">
-        <classes >
-            <class name ="fr.p10.miage.rps.model.RockPaperScissorsTest">
-                <methods>
-                    <include name ="testTiePlay"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
 </suite>
